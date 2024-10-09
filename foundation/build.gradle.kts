@@ -50,6 +50,10 @@ dependencies {
     api(libs.androidx.appcompat)
     api(libs.material)
 
+    api(libs.kotlin.stdlib)
+    api(libs.kotlinx.coroutines.core)
+    api(libs.kotlinx.coroutines.android)
+
     //Compose
     api(libs.androidx.runtime)
     api(libs.androidx.runtime.livedata)
@@ -93,4 +97,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.test.manifest)
+    api(libs.kotlinx.coroutines.test)
 }
