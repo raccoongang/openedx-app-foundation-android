@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     `maven-publish`
 }
 
@@ -28,6 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 publishing {
@@ -49,6 +53,11 @@ dependencies {
     api(libs.androidx.core.ktx)
     api(libs.androidx.appcompat)
     api(libs.material)
+    api(libs.androidx.fragment.ktx)
+    api(libs.androidx.constraintlayout)
+    api(libs.androidx.viewpager2)
+    api(libs.androidx.window)
+    api(libs.androidx.work.runtime.ktx)
 
     api(libs.kotlin.stdlib)
     api(libs.kotlinx.coroutines.core)
