@@ -1,5 +1,5 @@
 build:
-  maxIssues: 100
+  maxIssues: 0
   weights:
     complexity: 2
     LongParameterList: 1
@@ -35,7 +35,20 @@ style:
     active: true
     ignorePropertyDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
+    ignoreNumbers:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+      - '100'
   UnusedPrivateMember:
     active: true
     ignoreAnnotated:
       - 'Preview'
+
+exceptions:
+  active: true
+  TooGenericExceptionCaught:
+    active: false
+  PrintStackTrace:
+    active: false

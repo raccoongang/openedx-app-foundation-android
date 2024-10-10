@@ -7,6 +7,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
 
+internal const val COMPACT_MAX_WIDTH = 600
+internal const val MEDIUM_MAX_WIDTH = 840
+internal const val COMPACT_MAX_HEIGHT = 480
+internal const val MEDIUM_MAX_HEIGHT = 900
+
 data class WindowSize(
     val width: WindowType,
     val height: WindowType
@@ -44,13 +49,13 @@ fun rememberWindowSize(): WindowSize {
 }
 
 fun getScreenWidth(width: Int): WindowType = when {
-    width < 600 -> WindowType.Compact
-    width < 840 -> WindowType.Medium
+    width < COMPACT_MAX_WIDTH -> WindowType.Compact
+    width < MEDIUM_MAX_WIDTH -> WindowType.Medium
     else -> WindowType.Expanded
 }
 
 fun getScreenHeight(height: Int): WindowType = when {
-    height < 480 -> WindowType.Compact
-    height < 900 -> WindowType.Medium
+    height < COMPACT_MAX_HEIGHT -> WindowType.Compact
+    height < MEDIUM_MAX_HEIGHT -> WindowType.Medium
     else -> WindowType.Expanded
 }

@@ -7,11 +7,11 @@ import android.provider.OpenableColumns
 fun ContentResolver.getFileName(fileUri: Uri): String {
     var name = ""
     val returnCursor = this.query(fileUri, null, null, null, null)
-    if (returnCursor != null) {
-        val nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-        returnCursor.moveToFirst()
-        name = returnCursor.getString(nameIndex)
-        returnCursor.close()
+    returnCursor?.let {
+        val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        it.moveToFirst()
+        name = it.getString(nameIndex)
+        it.close()
     }
     return name
 }

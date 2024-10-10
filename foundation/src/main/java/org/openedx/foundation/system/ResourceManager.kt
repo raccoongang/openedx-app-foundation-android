@@ -3,7 +3,14 @@ package org.openedx.foundation.system
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import androidx.annotation.*
+import androidx.annotation.ArrayRes
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.FontRes
+import androidx.annotation.PluralsRes
+import androidx.annotation.RawRes
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import java.io.InputStream

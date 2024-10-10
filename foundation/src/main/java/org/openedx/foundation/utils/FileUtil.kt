@@ -79,24 +79,24 @@ class FileUtil(
     }
 
     fun deleteFile(filepath: String?): Boolean {
-        try {
-            if (filepath != null) {
-                val file = File(filepath)
-                if (file.exists()) {
-                    if (file.delete()) {
-                        Log.d(this.javaClass.name, "Deleted: " + file.path)
-                        return true
-                    } else {
-                        Log.d(this.javaClass.name, "Delete failed: " + file.path)
-                    }
-                } else {
-                    Log.d(this.javaClass.name, "Delete failed, file does NOT exist: " + file.path)
-                    return true
-                }
+        if (filepath == null) return false
+
+        val file = File(filepath)
+        val result = try {
+            if (!file.exists()) {
+                Log.d(this.javaClass.name, "Delete failed, file does NOT exist: ${file.path}")
+                false
+            } else if (file.delete()) {
+                Log.d(this.javaClass.name, "Deleted: ${file.path}")
+                true
+            } else {
+                Log.d(this.javaClass.name, "Delete failed: ${file.path}")
+                false
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            false
         }
-        return false
+        return result
     }
 }
