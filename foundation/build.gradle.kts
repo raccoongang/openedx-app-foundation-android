@@ -1,6 +1,11 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.detekt)
     `maven-publish`
 }
 
@@ -28,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 publishing {
@@ -35,7 +43,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "org.openedx"
             artifactId = "foundation"
-            version = "0.1"
+            version = "1.0"
 
             afterEvaluate {
                 from(components["release"])
@@ -49,6 +57,15 @@ dependencies {
     api(libs.androidx.core.ktx)
     api(libs.androidx.appcompat)
     api(libs.material)
+    api(libs.androidx.fragment.ktx)
+    api(libs.androidx.constraintlayout)
+    api(libs.androidx.viewpager2)
+    api(libs.androidx.window)
+    api(libs.androidx.work.runtime.ktx)
+
+    api(libs.kotlin.stdlib)
+    api(libs.kotlinx.coroutines.core)
+    api(libs.kotlinx.coroutines.android)
 
     //Compose
     api(libs.androidx.runtime)
@@ -85,9 +102,27 @@ dependencies {
     api(libs.androidx.room.runtime)
     api(libs.androidx.room.ktx)
 
+    //Webkit
+    api(libs.androidx.webkit)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.test.manifest)
+    api(libs.kotlinx.coroutines.test)
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom("$projectDir/../config/detekt.yml")
+    baseline = file("$projectDir/config/baseline.xml")
+}
+
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = "1.8"
+}
+tasks.withType<DetektCreateBaselineTask>().configureEach {
+    jvmTarget = "1.8"
 }
