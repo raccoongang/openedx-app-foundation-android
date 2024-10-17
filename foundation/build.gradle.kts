@@ -43,7 +43,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "org.openedx"
             artifactId = "foundation"
-            version = "0.1"
+            version = "1.0"
 
             afterEvaluate {
                 from(components["release"])
