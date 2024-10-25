@@ -114,6 +114,7 @@ dependencies {
 }
 
 detekt {
+    basePath = rootProject.projectDir.absolutePath
     buildUponDefaultConfig = true
     allRules = false
     config.setFrom("$projectDir/../config/detekt.yml")
@@ -122,6 +123,9 @@ detekt {
 
 tasks.withType<Detekt>().configureEach {
     jvmTarget = "1.8"
+    reports {
+        sarif.required.set(true)
+    }
 }
 tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = "1.8"
