@@ -27,11 +27,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         buildConfig = true
@@ -43,7 +43,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "org.openedx"
             artifactId = "foundation"
-            version = "1.0"
+            version = "1.0.0"
 
             afterEvaluate {
                 from(components["release"])
@@ -114,6 +114,7 @@ dependencies {
 }
 
 detekt {
+    basePath = rootProject.projectDir.absolutePath
     buildUponDefaultConfig = true
     allRules = false
     config.setFrom("$projectDir/../config/detekt.yml")
@@ -122,6 +123,9 @@ detekt {
 
 tasks.withType<Detekt>().configureEach {
     jvmTarget = "1.8"
+    reports {
+        sarif.required.set(true)
+    }
 }
 tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = "1.8"

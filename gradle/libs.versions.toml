@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.2"
+agp = "8.7.1"
 coil = "2.4.0"
 constraintlayout = "2.1.4"
 customview = "1.2.0-alpha02"
