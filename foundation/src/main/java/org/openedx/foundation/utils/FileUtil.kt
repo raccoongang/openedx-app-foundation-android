@@ -25,13 +25,13 @@ class FileUtil(
     ) {
         val gson: Gson = GsonBuilder().setPrettyPrinting().create()
         val jsonString = gson.toJson(obj)
-        File(getExternalAppDir().path + fileName).writeText(jsonString)
+        File(getExternalAppDir().path, fileName).writeText(jsonString)
     }
 
     inline fun <reified T> getObjectFromFile(
         fileName: String = "${T::class.java.simpleName}.json",
     ): T? {
-        val file = File(getExternalAppDir().path + fileName)
+        val file = File(getExternalAppDir().path, fileName)
         return if (file.exists()) {
             val gson: Gson = GsonBuilder().setPrettyPrinting().create()
             val jsonString = file.readText()
