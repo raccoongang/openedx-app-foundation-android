@@ -1,5 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
@@ -11,7 +12,7 @@ plugins {
 
 android {
     namespace = "org.openedx.foundation"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24
@@ -30,8 +31,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+        }
     }
     buildFeatures {
         buildConfig = true
@@ -41,9 +44,9 @@ android {
 publishing {
     publications {
         register<MavenPublication>("release") {
-            groupId = "org.openedx"
-            artifactId = "foundation"
-            version = "1.0.1"
+            groupId = "com.github.openedx"
+            artifactId = "openedx-app-foundation-android"
+            version = "1.0.2"
 
             afterEvaluate {
                 from(components["release"])
